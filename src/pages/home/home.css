@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Static&display=swap');
+.top-layer {
+        margin-left: 30px;
+    margin-right: 30px;
+}
+.home {
+
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    background-color: #ECFDF5;
+    padding: 1rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+}
+.left-side {
+    padding: 0;
+    margin: 0;
+}
+.home .left-side span {
+    font-family: "Comforter", cursive;
+    color: #F97316;
+    font-weight: 400;
+    padding: 0;
+}
+
+.home .left-side p {
+    font-size: 16px;
+    color: #F97316;
+  
+}
+.b {
+    margin: 0;
+    padding: 0;
+}
+.b p {
+    margin: 0;
+    padding-bottom: 1rem;
+    font-size: 64px;
+    font-family: Dm Sans, sans-serif;
+    font-weight: regular;
+}
+.b span{
+    color: #10B981;
+    font-family: "Comforter", cursive;
+    font-size: 24px;
+}
+.last p {
+    font-size: 64px;
+    margin: 0;
+    padding: 0;
+}
+.last span {
+    color: #F97316;
+}
+.wrapper {
+    padding: 1rem 1rem;
+}
+.wrapper .buttons {
+    padding: 3rem 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+}
+.wrapper .buttons button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: Dm Sans, sans-serif;
+    font-weight: 500;
+}
+.shop-now {
+    background-color: #F97316;
+    color: white;
+}
+.contact-us {
+    background-color: #10B981;
+    color: white;
+    
+}
