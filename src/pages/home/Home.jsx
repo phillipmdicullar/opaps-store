@@ -3,6 +3,8 @@ import "./home.css";
 import oneImg from "./1.png"
 import twoImg from "./2.png"
 import Categories from './section/categories/Categories';
+import FeaturedProducts from './section/featured/FeaturedProducts';
+import NewProducts from './section/new/NewProducts';
 function Home() {
   return (
     <div className='top-layer'>    <div className='home'>
@@ -27,6 +29,8 @@ function Home() {
         </div>
     </div>
     <Categories/>
+        <FeaturedProducts />
+      <NewProducts />
     </div>
   )
 }

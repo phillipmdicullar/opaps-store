@@ -1,38 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./categories.css";
-import veges from "./images/veges.png";
-import veges1 from "./images/veges1.png";
-import veges2 from "./images/veges2.png";
-import veges3 from "./images/veges3.png";
+
 function Categories() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    // Fetch unique categories from products API
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => {
+        const uniqueCategories = [...new Set(data.map((item) => item.category))];
+        setCategories(uniqueCategories);
+      })
+      .catch((err) => console.error("Error fetching categories:", err));
+  }, []);
+
   return (
     <div className="categories">
       <p>Product categories</p>
       <div className="category-list">
-        <div className="cat-one">
-          <a href="#">
-            <img src={veges} alt="" />
-            <p>Vegetables</p>
-          </a>
-        </div>
-        <div className="cat-one">
-          <a href="#">
-            <img src={veges1} alt="" />
-            <p>Fruits</p>
-          </a>
-        </div>
-        <div className="cat-one">
-          <a href="#">
-            <img src={veges2} alt="" />
-            <p>Diary</p>
-          </a>
-        </div>
-        <div className="cat-one">
-          <a href="#">
-            <img src={veges3} alt="" />
-            <p>Meat</p>
-          </a>
-        </div>
+        {categories.map((cat, index) => (
+          <div className="cat-one" key={index}>
+            <a href={`#${cat}`}>
+              {/* fallback image, you can later map custom icons */}
+              <img
+                src={`https://via.placeholder.com/100?text=${cat}`}
+                alt={cat}
+              />
+              <p>{cat}</p>
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );

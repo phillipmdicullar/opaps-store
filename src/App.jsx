@@ -10,7 +10,7 @@ import Login from "./pages/login/Login";
 import Products from "./pages/products/Products";
 import { useState } from "react";
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(100);
 
   return (
     <>

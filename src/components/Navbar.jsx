@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./navbar.css"; // Correct import
 import basketImg from "../assets/basket.png"; // Correct import
 import Logo from "../assets/logo.png"; // Correct import  
-function Navbar() {
+function Navbar({count}) {
   return (
     <div className="navbar">
       <p className="logo">
@@ -33,7 +33,7 @@ function Navbar() {
       <div className="cart">
         <a href="/cart"><img src={basketImg} alt="cart" /></a>
         <span>
-          <sup>20</sup>
+          <sup>{count}</sup>
         </span>
       </div>
      </div>
