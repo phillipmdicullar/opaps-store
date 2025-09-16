@@ -3,34 +3,56 @@ import "./categories.css";
 
 function Categories() {
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch unique categories from products API
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => {
-        const uniqueCategories = [...new Set(data.map((item) => item.category))];
-        setCategories(uniqueCategories);
-      })
-      .catch((err) => console.error("Error fetching categories:", err));
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch("https://fakestoreapi.com/products");
+        const data = await res.json();
+
+        // Group categories and pick first product image per category
+        const categoryMap = {};
+        data.forEach((item) => {
+          if (!categoryMap[item.category]) {
+            categoryMap[item.category] = item.image;
+          }
+        });
+
+        setCategories(
+          Object.entries(categoryMap).map(([cat, img]) => ({
+            name: cat,
+            image: img,
+          }))
+        );
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
   }, []);
+
+  if (loading) return <p>Loading categories...</p>;
 
   return (
     <div className="categories">
       <p>Product categories</p>
       <div className="category-list">
-        {categories.map((cat, index) => (
-          <div className="cat-one" key={index}>
-            <a href={`#${cat}`}>
-              {/* fallback image, you can later map custom icons */}
-              <img
-                src={`https://via.placeholder.com/100?text=${cat}`}
-                alt={cat}
-              />
-              <p>{cat}</p>
-            </a>
-          </div>
-        ))}
+        {categories.length > 0 ? (
+          categories.map((cat, index) => (
+            <div className="cat-one" key={index}>
+              <a href={`#${cat.name}`}>
+                <img src={cat.image} alt={cat.name} />
+                <p>{cat.name}</p>
+              </a>
+            </div>
+          ))
+        ) : (
+          <p>No categories found.</p>
+        )}
       </div>
     </div>
   );

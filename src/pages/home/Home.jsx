@@ -5,6 +5,7 @@ import twoImg from "./2.png"
 import Categories from './section/categories/Categories';
 import FeaturedProducts from './section/featured/FeaturedProducts';
 import NewProducts from './section/new/NewProducts';
+import Offers from './section/offers/Offers';
 function Home() {
   return (
     <div className='top-layer'>    <div className='home'>
@@ -31,6 +32,7 @@ function Home() {
     <Categories/>
         <FeaturedProducts />
       <NewProducts />
+      <Offers />
     </div>
   )
 }

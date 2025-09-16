@@ -21,3 +21,12 @@
     gap: 2rem;
     margin-top: 2rem;
 }
+.category-list .cat-one img {
+  width: 120px;   /* control the size */
+  height: 120px;  /* keep it square */
+  object-fit: contain; /* make sure images scale nicely */
+  border-radius: 4px;  /* optional: rounded corners */
+  background: #ECFDF5; /* optional: give images a clean background */
+  padding: 10px;       /* optional: spacing around the image */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* optional: subtle shadow */
+}
