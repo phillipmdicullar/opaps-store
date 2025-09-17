@@ -6,6 +6,7 @@ import Categories from './section/categories/Categories';
 import FeaturedProducts from './section/featured/FeaturedProducts';
 import NewProducts from './section/new/NewProducts';
 import Offers from './section/offers/Offers';
+import Top from './section/top/Top';
 function Home() {
   return (
     <div className='top-layer'>    <div className='home'>
@@ -33,6 +34,7 @@ function Home() {
         <FeaturedProducts />
       <NewProducts />
       <Offers />
+      <Top />
     </div>
   )
 }

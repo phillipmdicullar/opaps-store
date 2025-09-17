@@ -2,9 +2,7 @@
     display: flex;
     margin-top: 4rem;
     margin-bottom: 4rem;
-    justify-content: space-evenly;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    justify-content: space-between;
 }
 .offers .offers-left {
     display: flex;
@@ -12,7 +10,7 @@
     justify-content: space-between;
     padding: 1rem;
     height: 250px;
-    width: 545px;
+    width: 550px;
     background: #EAB308;
     border-radius: 8px;
 }
@@ -50,7 +48,7 @@
     justify-content: space-between;
     padding: 1rem;
     height: 250px;
-    width: 545px;
+    width: 550px;
     background: #10B981;
     border-radius: 8px;
 }

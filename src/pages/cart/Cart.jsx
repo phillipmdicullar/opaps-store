@@ -1,8 +1,11 @@
 import React from 'react'
+import Add from './add/Add'
 
 function Cart() {
   return (
-    <div>Cart</div>
+    <div>
+      <Add />
+    </div>
   )
 }
 
