@@ -68,7 +68,7 @@ function Add() {
         <div key={item.id} className="cart-item">
           <div className="item-header">
             <input type="checkbox" />
-            <span className="store-name">FakeStore</span>
+            <span className="store-name">Opaps store</span>
             <span className="coupon">KSh 100 OFF</span>
           </div>
           <div className="item-body">
