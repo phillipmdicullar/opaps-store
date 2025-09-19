@@ -102,7 +102,7 @@ function Add() {
         </div>
         <div className="checkout">
           <span className="total">Total: KSh {total.toFixed(2)}</span>
-          <button className="checkout-btn">Proceed to Checkout</button>
+          <button className="checkout-btn">Proceed to Checkout </button>
         </div>
       </div>
     </div>

@@ -8,14 +8,36 @@ import Shop from "./pages/shop/Shop";
 import Cart from "./pages/cart/Cart";
 import Login from "./pages/login/Login";
 import Products from "./pages/products/Products";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 function App() {
-  const [count, setCount] = useState(100);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const res = await fetch("https://fakestoreapi.com/carts/1"); // demo cart
+        const cart = await res.json();
+
+        // count all items inside the cart
+        const totalItems = cart.products.reduce(
+          (acc, item) => acc + item.quantity,
+          0
+        );
+
+        setCount(totalItems);
+      } catch (err) {
+        console.error("Error fetching cart:", err);
+      }
+    };
+
+    fetchCart();
+  }, []);
 
   return (
     <>
       <BrowserRouter>
-        <Navbar count={count}/>
+        <Navbar count={count} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
