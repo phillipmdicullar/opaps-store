@@ -32,6 +32,7 @@ function Top() {
         {products.map(({ id, image, title, price }) => (
           <ProductCard
             key={id}
+            id={id}
             image={image}
             title={title}
             price={price}

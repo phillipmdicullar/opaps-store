@@ -1,14 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./ProductCard.css";
 
-function ProductCard({ image, title, price }) {
+function ProductCard({ id, image, title, price }) {
   return (
     <div className="product-card">
-      <img src={image} alt={title} />
-      <h4>{title}</h4>
-      <p className="price">${price}</p>
+      <Link to={`/products/${id}`} className="product-link">
+        <img src={image} alt={title} className="product-image" />
+        <h4 className="product-title">{title}</h4>
+      </Link>
+      <p className="product-price">${price}</p>
+      
     </div>
   );
 }
 
 export default ProductCard;
+
