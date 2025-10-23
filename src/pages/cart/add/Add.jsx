@@ -8,17 +8,24 @@ function Add() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        // get cart 1 for demo (you could use a logged-in user later)
         const res = await fetch("https://fakestoreapi.com/carts/1");
         const cart = await res.json();
 
-        // fetch each product details
+        if (!cart || !cart.products) {
+          console.error("Invalid cart response:", cart);
+          setLoading(false);
+          return;
+        }
+
         const products = await Promise.all(
           cart.products.map(async (p) => {
+            const productId = p.productId || p.id || p.productID; // safety check
+
             const productRes = await fetch(
-              `https://fakestoreapi.com/products/${p.productId}`
+              `https://fakestoreapi.com/products/${productId}`
             );
             const product = await productRes.json();
+
             return {
               id: product.id,
               title: product.title,
@@ -31,9 +38,9 @@ function Add() {
         );
 
         setCartItems(products);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching cart:", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -64,36 +71,40 @@ function Add() {
 
   return (
     <div className="cart-container">
-      {cartItems.map((item) => (
-        <div key={item.id} className="cart-item">
-          <div className="item-header">
-            <input type="checkbox" />
-            <span className="store-name">Opaps store</span>
-            <span className="coupon">KSh 100 OFF</span>
-          </div>
-          <div className="item-body">
-            <img src={item.img} alt={item.title} className="item-img" />
-            <div className="item-info">
-              <p className="item-title">{item.title}</p>
-              <p className="item-desc">{item.desc}</p>
-              <div className="item-actions">
-                <div className="quantity">
-                  <button onClick={() => updateQuantity(item.id, -1)}>-</button>
-                  <span>{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        cartItems.map((item) => (
+          <div key={item.id} className="cart-item">
+            <div className="item-header">
+              <input type="checkbox" />
+              <span className="store-name">Opaps store</span>
+              <span className="coupon">KSh 100 OFF</span>
+            </div>
+            <div className="item-body">
+              <img src={item.img} alt={item.title} className="item-img" />
+              <div className="item-info">
+                <p className="item-title">{item.title}</p>
+                <p className="item-desc">{item.desc}</p>
+                <div className="item-actions">
+                  <div className="quantity">
+                    <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+                    <span>{item.quantity}</span>
+                    <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+                  </div>
+                  <span className="price">KSh {item.price.toFixed(2)}</span>
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteItem(item.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
-                <span className="price">KSh {item.price.toFixed(2)}</span>
-                <button
-                  className="delete-btn"
-                  onClick={() => deleteItem(item.id)}
-                >
-                  Delete
-                </button>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
 
       {/* Footer */}
       <div className="cart-footer">
@@ -102,7 +113,7 @@ function Add() {
         </div>
         <div className="checkout">
           <span className="total">Total: KSh {total.toFixed(2)}</span>
-          <button className="checkout-btn">Proceed to Checkout </button>
+          <button className="checkout-btn">Proceed to Checkout</button>
         </div>
       </div>
     </div>
