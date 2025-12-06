@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"; // added useLocation
 import Navbar from "./components/Navbar";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";
@@ -11,17 +11,16 @@ import Products from "./pages/products/Products";
 import ProductDetails from "./pages/product-details/ProductDeatails";
 import { useState, useEffect } from "react";
 
-function App() {
+function AppContent() {
+  const location = useLocation(); // get current route
   const [cart, setCart] = useState([]);
   const [count, setCount] = useState(0);
 
-  // Load demo cart from API (optional — you can remove this if using local cart only)
   useEffect(() => {
     const fetchCart = async () => {
       try {
         const res = await fetch("https://fakestoreapi.com/carts/1");
         const cartData = await res.json();
-
         const totalItems = cartData.products.reduce(
           (acc, item) => acc + item.quantity,
           0
@@ -31,19 +30,20 @@ function App() {
         console.error("Error fetching cart:", err);
       }
     };
-
     fetchCart();
   }, []);
 
-  // 🔸 Function to add an item to the cart
   const handleAddToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
     setCount((prevCount) => prevCount + 1);
   };
 
+  // Hide Navbar on login page
+  const hideNavbar = location.pathname === "/login";
+
   return (
-    <BrowserRouter>
-      <Navbar count={count} />
+    <>
+      {!hideNavbar && <Navbar count={count} />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -51,14 +51,21 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart cart={cart} />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
-        {/* 🔸 pass the add-to-cart function to ProductDetails */}
         <Route
           path="/products/:id"
           element={<ProductDetails onAddToCart={handleAddToCart} />}
         />
+        <Route path="/login" element={<Login />} />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

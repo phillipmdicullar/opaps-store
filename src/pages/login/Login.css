@@ -1,0 +1,61 @@
+.login-form {
+    margin: 3rem 3rem 3rem 3rem;
+  display: flex;
+  height: 100vh;
+  
+
+}
+.form-left {
+    margin: 1rem;
+  display: flex;
+  justify-content: space-between;
+flex-direction: column;
+  padding: 20px;
+  width: 50%;
+  border-radius: 10px;
+  background: #fffc00;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #ffffff, #fffc00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+}
+.body-section h2 {
+  color: green;
+  
+}
+.top-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.form-right {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    
+}
+.login-buttons {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+#email, #password {
+    margin-top: 0.5rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
